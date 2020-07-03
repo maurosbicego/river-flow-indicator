@@ -93,7 +93,6 @@ def lcd_string(message,line):
     lcd_byte(ord(message[i]),LCD_CHR)
 
 def showmessage(message, line):
-  lcd_init()
   if line == 1:
       lcd_string(message, LCD_LINE_1)
   else:
