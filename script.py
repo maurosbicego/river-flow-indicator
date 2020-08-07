@@ -19,9 +19,10 @@ data = r.get(endpoint).json()["payload"]
 flow = data[0]["val"]
 temperature = data[1]["val"]
 lcd_init()
-showmessage(str(round(flow)) + "m3/s, " + str(round(temperature, 1)) + "°C",1)
+showmessage(str(round(flow)) + "m3/s - " + str(round(temperature, 1)) + "°C",1)
 if flow > threshold:
-    showmessage("Nicht befahrbar",2)
+    showmessage(str(round(flow)) + "m3/s - Aare",1)
+    showmessage("nicht befahrbar",2)
     GPIO.output(red, GPIO.HIGH)
     GPIO.output(green, GPIO.LOW)
 else:
