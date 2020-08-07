@@ -15,17 +15,21 @@ station = str(config["station_id"])
 threshold = config["threshold"]
 endpoint = "https://api.existenz.ch/apiv1/hydro/latest?locations=" + station + "&parameters=flow,temperature&format=table&app=https%3A%2F%2Fgithub.com%2Fmaurosbicego%2Friver-flow-indicator"
 
-data = r.get(endpoint).json()["payload"]
-flow = data[0]["val"]
-temperature = data[1]["val"]
-lcd_init()
-showmessage(str(round(flow)) + "m3/s - " + str(round(temperature, 1)) + "°C",1)
-if flow > threshold:
-    showmessage(str(round(flow)) + "m3/s - Aare",1)
-    showmessage("nicht befahrbar",2)
-    GPIO.output(red, GPIO.HIGH)
-    GPIO.output(green, GPIO.LOW)
-else:
-    showmessage("Aare befahrbar",2)
-    GPIO.output(red, GPIO.LOW)
-    GPIO.output(green, GPIO.HIGH)
+try:
+    data = r.get(endpoint).json()["payload"]
+    flow = data[0]["val"]
+    temperature = data[1]["val"]
+    lcd_init()
+    showmessage(str(round(flow)) + "m3/s - " + str(round(temperature, 1)) + "°C",1)
+    if flow > threshold:
+        showmessage(str(round(flow)) + "m3/s - Aare",1)
+        showmessage("nicht befahrbar",2)
+        GPIO.output(red, GPIO.HIGH)
+        GPIO.output(green, GPIO.LOW)
+    else:
+        showmessage("Aare befahrbar",2)
+        GPIO.output(red, GPIO.LOW)
+        GPIO.output(green, GPIO.HIGH)
+except:
+    showmessage("Kein Internet",1)
+    showmessage("Info per SMS",2)
