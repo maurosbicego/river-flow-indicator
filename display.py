@@ -77,6 +77,14 @@ def lcd_byte(bits, mode):
   bus.write_byte(I2C_ADDR, bits_low)
   lcd_toggle_enable(bits_low)
 
+ def lcd_byte_extended(bits, bits2, mode):
+   bits_high = mode | (bits & bits2) | LCD_BACKLIGHT
+   bits_low = mode | ((bits<<4) & bits2) | LCD_BACKLIGHT
+   bus.write_byte(I2C_ADDR, bits_high)
+   lcd_toggle_enable(bits_high)
+   bus.write_byte(I2C_ADDR, bits_low)
+   lcd_toggle_enable(bits_low)
+
 def lcd_toggle_enable(bits):
   time.sleep(E_DELAY)
   bus.write_byte(I2C_ADDR, (bits | ENABLE))
@@ -91,9 +99,13 @@ def lcd_string(message,line):
 
   for i in range(LCD_WIDTH):
     charval = ord(message[i])
-    if charval = 176:
-        charval = 178
-    lcd_byte(charval,LCD_CHR)
+    if charval == 176:
+        lcd_byte(223,LCD_CHR)
+    elif charval == 179:
+        lcd_byte_extended(194, 179,LCD_CHR)
+    else:
+        lcd_byte(charval,LCD_CHR)
+
 
 def showmessage(message, line):
   if line == 1:
