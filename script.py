@@ -17,7 +17,7 @@ endpoint = "https://api.existenz.ch/apiv1/hydro/latest?locations=" + station + "
 
 data = r.get(endpoint).json()["payload"]
 flow = data[0]["val"]
-temperature = [1]["val"]
+temperature = data[1]["val"]
 lcd_init()
 showmessage(str(flow) + "m³/s, " + str(temperature) + " °C",1)
 if flow > threshold:
