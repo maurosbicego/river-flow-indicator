@@ -1,6 +1,13 @@
 import json
 import requests as r
 from display import showmessage, lcd_init
+import RPi.GPIO as GPIO
+
+red = 11 #GPIO17
+green = 13 # GPIO27
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(red, GPIO.OUT)
+GPIO.setup(green, GPIO.OUT)
 state = 1
 with open("config.json") as file:
     config = json.load(file)
@@ -13,5 +20,9 @@ lcd_init()
 showmessage(str(flow),1)
 if flow > threshold:
     showmessage("Aare nicht befahrbar",2)
+    GPIO.output(rot, GPIO.HIGH)
+    GPIO.output(green, GPIO.LOW)
 else:
     showmessage("Aare befahrbar",2)
+    GPIO.output(rot, GPIO.LOW)
+    GPIO.output(green, GPIO.HIGH)
