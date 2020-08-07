@@ -20,9 +20,9 @@ lcd_init()
 showmessage(str(flow),1)
 if flow > threshold:
     showmessage("Aare nicht befahrbar",2)
-    GPIO.output(rot, GPIO.HIGH)
+    GPIO.output(red, GPIO.HIGH)
     GPIO.output(green, GPIO.LOW)
 else:
     showmessage("Aare befahrbar",2)
-    GPIO.output(rot, GPIO.LOW)
+    GPIO.output(red, GPIO.LOW)
     GPIO.output(green, GPIO.HIGH)
