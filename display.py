@@ -90,7 +90,10 @@ def lcd_string(message,line):
   lcd_byte(line, LCD_CMD)
 
   for i in range(LCD_WIDTH):
-    lcd_byte(ord(message[i]),LCD_CHR)
+    charval = ord(message[i])
+    if charval = 176:
+        charval = 178
+    lcd_byte(charval,LCD_CHR)
 
 def showmessage(message, line):
   if line == 1:
