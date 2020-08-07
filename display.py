@@ -77,13 +77,13 @@ def lcd_byte(bits, mode):
   bus.write_byte(I2C_ADDR, bits_low)
   lcd_toggle_enable(bits_low)
 
- def lcd_byte_extended(bits, bits2, mode):
-   bits_high = mode | (bits & bits2) | LCD_BACKLIGHT
-   bits_low = mode | ((bits<<4) & bits2) | LCD_BACKLIGHT
-   bus.write_byte(I2C_ADDR, bits_high)
-   lcd_toggle_enable(bits_high)
-   bus.write_byte(I2C_ADDR, bits_low)
-   lcd_toggle_enable(bits_low)
+def lcd_byte_extended(bits, bits2, mode):
+  bits_high = mode | (bits & bits2) | LCD_BACKLIGHT
+  bits_low = mode | ((bits<<4) & bits2) | LCD_BACKLIGHT
+  bus.write_byte(I2C_ADDR, bits_high)
+  lcd_toggle_enable(bits_high)
+  bus.write_byte(I2C_ADDR, bits_low)
+  lcd_toggle_enable(bits_low)
 
 def lcd_toggle_enable(bits):
   time.sleep(E_DELAY)
