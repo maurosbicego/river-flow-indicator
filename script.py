@@ -1,4 +1,5 @@
 import json
+import os
 import requests as r
 from display import showmessage, lcd_init
 import RPi.GPIO as GPIO
@@ -9,7 +10,9 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(red, GPIO.OUT)
 GPIO.setup(green, GPIO.OUT)
 state = 1
-with open("config.json") as file:
+dirname = os.path.dirname(__file__)
+
+with open(dirname + "config.json") as file:
     config = json.load(file)
 station = str(config["station_id"])
 threshold = config["threshold"]

@@ -91,7 +91,7 @@ def lcd_string(message,line):
 
   for i in range(LCD_WIDTH):
     if ord(message[i]) == 176:
-        lcd_byte(223,LCD_CHR) # degree sign (possibli from Katakana)
+        lcd_byte(223,LCD_CHR) # degree sign (possibly from Katakana)
     else:
         lcd_byte(ord(message[i]),LCD_CHR)
 
