@@ -12,7 +12,7 @@ GPIO.setup(green, GPIO.OUT)
 state = 1
 dirname = os.path.dirname(__file__)
 
-with open(dirname + "config.json") as file:
+with open(dirname + "/config.json") as file:
     config = json.load(file)
 station = str(config["station_id"])
 threshold = config["threshold"]
