@@ -36,3 +36,5 @@ try:
 except:
     showmessage("Kein Internet",1)
     showmessage("Info per SMS",2)
+    GPIO.output(red, GPIO.LOW)
+    GPIO.output(green, GPIO.LOW)
